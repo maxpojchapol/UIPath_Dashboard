@@ -20,7 +20,7 @@ from django.urls import include, re_path
 from dashboard import views
 
 urlpatterns = [
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     re_path(r'^',include('dashboard.urls')),
     path('displayprocess', views.Displayprocess , name='Displayprocess'),
     path('home',views.home, name='home'),
