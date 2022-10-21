@@ -1,0 +1,4 @@
+Channel_id = "@218rvrix"
+Channel_secret = "8ec4ee85b340c96fce588afde7d6ff09"
+Line_accesstoken = "lSVipXFFF0fmwM4DoaPaEX9yBpi9bfsm2VQtBk/AbOGU+0spmOrKc9KtzGftSWw651BKqh8oxOukqCDoJOMophuB/shwoIio6BVF6yAQ4DfJMF30tObkrPPjznGGwNPN1AwNvITT+rTKk3TYkmFNtQdB04t89/1O/w1cDnyilFU="
+Group_id = "C13316b2b715e83afafd512a413910455"

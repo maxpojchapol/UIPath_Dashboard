@@ -1,0 +1,40 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<html>
+  <head>
+    <style>
+      table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Display process</h1>
+    <table style="width:100%">
+      <tr>
+        <th>process_name</th>
+        <th>computer_name</th>
+        <th>description</th>
+        <th>status</th>
+        <th>isrunning</th>
+        <th>customer_name</th>
+      </tr>
+    {% for project in projects %}
+      <tr>
+        <td>{{ project.process_name }}</td>
+        <td>{{ project.computer_name }}</td>
+        <td>{{ project.description }}</td>
+        <td>{{ project.status }}</td>
+        <td>{{ project.isrunning }}</td>
+        <td>{{ project.customer_name }}</td>
+      </tr>
+
+    {% endfor %}
+    </table>
+  </body>
+</html>
+{% endblock %}
