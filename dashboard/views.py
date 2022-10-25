@@ -16,6 +16,10 @@ def Displayprocess(request):
     projects = Process.objects.all()
     return render(request, 'Employee/Displayprocess.html',{'projects':projects})
 
+def DisplayLog(request):
+    logtable = Reportings.objects.all()
+    return render(request, 'Employee/DisplayLog.html',{'logtable':logtable})
+
 def home(request):
     return render(request, 'home.html')
 
@@ -32,12 +36,16 @@ def process_status_table(request,id=0):
 @csrf_exempt
 def process_log_table(request,id=0):
     if request.method=='POST':
-        process_data=JSONParser().parse(request)
-        process_serializer=ProcessSerializer(data=process_data)
-        if process_serializer.is_valid():
-            process_serializer.save()
+        log_data=JSONParser().parse(request)
+        log_serializer=LogSerializer(data=log_data)
+        if log_serializer.is_valid():
+            log_serializer.save()
             return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Failed to Add",safe=False)
+    # elif request.method=='GET':
+    #     allLog = Reportings.objects.all()
+    #     log_serializer=LogSerializer(allLog,many=True)
+    #     return JsonResponse(log_serializer.data,safe=False)
 
 @csrf_exempt
 def linewebhook(request):
@@ -69,7 +77,7 @@ def NotifyMessage():
     }
 
     data = json.dumps(data) ## dump dict >> Json Object
-    r = requests.post(LINE_API, headers=headers, data=data) 
+    r = requests.post(LINE_API, headers=headers, data=data)
     return 200
 
 

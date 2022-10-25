@@ -23,7 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^',include('dashboard.urls')),
     path('displayprocess', views.Displayprocess , name='Displayprocess'),
-    path('home',views.home, name='home'),
+    path('displaylog', views.DisplayLog , name='DisplayLog'),
+    path('home/',views.home, name='home'),
     path('',views.home, name='home'),
     path('linewebhook',views.linewebhook, name = 'linewebhook')
 ]

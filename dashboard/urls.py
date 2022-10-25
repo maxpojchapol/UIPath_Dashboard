@@ -12,6 +12,7 @@ urlpatterns=[
     # re_path(r'^employee/([0-9]+)$',views.employeeApi),
 
     re_path(r'^process$',views.process_status_table),
+    re_path(r'^addlog$',views.process_log_table),
 
     # re_path(r'^employee/savefile',views.SaveFile)
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    ]

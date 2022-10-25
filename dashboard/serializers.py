@@ -15,3 +15,8 @@ class ProcessSerializer(serializers.ModelSerializer):
     class Meta:
         model=Process
         fields=('process_name','computer_name','description','status','isrunning','customer_name')
+
+class LogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Reportings
+        fields=('process_id','timestamp','comment','reason')

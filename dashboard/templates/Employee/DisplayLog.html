@@ -1,0 +1,36 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<html>
+  <head>
+    <style>
+      table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+    </style>
+  </head>
+  <body>
+    <h1>Display process</h1>
+    <table style="width:100%">
+      <tr>
+        <th>process_name</th>
+        <th>timestamp</th>
+        <th>comment</th>
+        <th>reason</th>
+      </tr>
+    {% for log in logtable %}
+      <tr>
+        <td>{{ log.process_id }}</td>
+        <td>{{ log.timestamp }}</td>
+        <td>{{ log.comment }}</td>
+        <td>{{ log.reason }}</td>
+      </tr>
+
+    {% endfor %}
+    </table>
+  </body>
+</html>
+{% endblock %}
