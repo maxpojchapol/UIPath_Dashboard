@@ -22,8 +22,8 @@ from dashboard import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^',include('dashboard.urls')),
-    path('displayprocess', views.Displayprocess , name='Displayprocess'),
-    path('displaylog', views.DisplayLog , name='DisplayLog'),
+    path('process', views.process_status_table , name='process'),
+    path('log', views.process_log_table , name='log'),
     path('home/',views.home, name='home'),
     path('',views.home, name='home'),
     path('linewebhook',views.linewebhook, name = 'linewebhook')

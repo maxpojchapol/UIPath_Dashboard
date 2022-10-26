@@ -12,19 +12,22 @@ from django.core.files.storage import default_storage
 import requests
 import json
 # Create your views here.
-def Displayprocess(request):
-    projects = Process.objects.all()
-    return render(request, 'Employee/Displayprocess.html',{'projects':projects})
+# def displayprocess(request):
+#     projects = Process.objects.all()
+#     return render(request, 'Displayprocess.html',{'projects':projects})
 
-def DisplayLog(request):
-    logtable = Reportings.objects.all()
-    return render(request, 'Employee/DisplayLog.html',{'logtable':logtable})
+# def displayLog(request):
+#     logtable = Reportings.objects.all()
+#     return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 def home(request):
     return render(request, 'home.html')
 
 @csrf_exempt
 def process_status_table(request,id=0):
+    if request.method=='GET':
+        projects = Process.objects.all()
+        return render(request, 'Displayprocess.html',{'projects':projects})
     if request.method=='POST':
         process_data=JSONParser().parse(request)
         process_serializer=ProcessSerializer(data=process_data)
@@ -35,7 +38,15 @@ def process_status_table(request,id=0):
 
 @csrf_exempt
 def process_log_table(request,id=0):
+    if request.method=='GET':
+        logtable = Reportings.objects.all()
+        
+        # เพิ่ม computer name กับ process name ในการ display
+        # computer name = process_id.computer_name
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
     if request.method=='POST':
+        # อ่าน body computer name กับ process name เพื่อไปหา Process object แล้ว save ลง process_id
+        # process_id = Process.object.filter(computhe_name = "" && )
         log_data=JSONParser().parse(request)
         log_serializer=LogSerializer(data=log_data)
         if log_serializer.is_valid():
@@ -58,7 +69,7 @@ def linewebhook(request):
 
 
 @csrf_exempt
-def NotifyMessage():
+def NotifyMessage(message):
     LINE_API = 'https://api.line.me/v2/bot/message/push'
 
     Authorization = 'Bearer {}'.format(Line_accesstoken) ##ที่ยาวๆ
@@ -72,7 +83,7 @@ def NotifyMessage():
         "to": Group_id,
         "messages":[{
             "type":"text",
-            "text":"Hello1"
+            "text":message
         }]
     }
 
