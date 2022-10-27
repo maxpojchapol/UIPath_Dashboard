@@ -11,16 +11,15 @@ from Config.LineConfig import *
 from django.core.files.storage import default_storage
 import requests
 import json
-# Create your views here.
-def Displayprocess(request):
-    projects = Process.objects.all()
-    return render(request, 'Employee/Displayprocess.html',{'projects':projects})
 
 def home(request):
     return render(request, 'home.html')
 
 @csrf_exempt
-def process_status_table(request,id=0):
+def process_status_table(request,id):
+    if request.method=='GET':
+        projects = Process.objects.all()
+        return render(request, 'Displayprocess.html',{'projects':projects})
     if request.method=='POST':
         process_data=JSONParser().parse(request)
         process_serializer=ProcessSerializer(data=process_data)
@@ -30,14 +29,26 @@ def process_status_table(request,id=0):
         return JsonResponse("Failed to Add",safe=False)
 
 @csrf_exempt
-def process_log_table(request,id=0):
+def process_log_table(request,id):
+    if request.method=='GET':
+        logtable = Reportings.objects.all()
+        
+        # เพิ่ม computer name กับ process name ในการ display
+        # computer name = process_id.computer_name
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
     if request.method=='POST':
-        process_data=JSONParser().parse(request)
-        process_serializer=ProcessSerializer(data=process_data)
-        if process_serializer.is_valid():
-            process_serializer.save()
+        # อ่าน body computer name กับ process name เพื่อไปหา Process object แล้ว save ลง process_id
+        # process_id = Process.object.filter(computhe_name = "" && )
+        log_data=JSONParser().parse(request)
+        log_serializer=LogSerializer(data=log_data)
+        if log_serializer.is_valid():
+            log_serializer.save()
             return JsonResponse("Added Successfully",safe=False)
         return JsonResponse("Failed to Add",safe=False)
+    # elif request.method=='GET':
+    #     allLog = Reportings.objects.all()
+    #     log_serializer=LogSerializer(allLog,many=True)
+    #     return JsonResponse(log_serializer.data,safe=False)
 
 @csrf_exempt
 def linewebhook(request):
@@ -50,7 +61,7 @@ def linewebhook(request):
 
 
 @csrf_exempt
-def NotifyMessage():
+def NotifyMessage(message):
     LINE_API = 'https://api.line.me/v2/bot/message/push'
 
     Authorization = 'Bearer {}'.format(Line_accesstoken) ##ที่ยาวๆ
@@ -64,12 +75,12 @@ def NotifyMessage():
         "to": Group_id,
         "messages":[{
             "type":"text",
-            "text":"Hello1"
+            "text":message
         }]
     }
 
     data = json.dumps(data) ## dump dict >> Json Object
-    r = requests.post(LINE_API, headers=headers, data=data) 
+    r = requests.post(LINE_API, headers=headers, data=data)
     return 200
 
 

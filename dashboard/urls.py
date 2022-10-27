@@ -1,4 +1,4 @@
-from django.urls import include, re_path
+from django.urls import include, re_path, path
 from dashboard import views
 
 from django.conf.urls.static import static
@@ -11,7 +11,8 @@ urlpatterns=[
     # re_path(r'^employee$',views.employeeApi),
     # re_path(r'^employee/([0-9]+)$',views.employeeApi),
 
-    re_path(r'^process$',views.process_status_table),
+    path('process1/<int:id>/',views.process_status_table, name='process_status_table'),
+    re_path(r'^addlog$',views.process_log_table),
 
     # re_path(r'^employee/savefile',views.SaveFile)
-]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+    ]
