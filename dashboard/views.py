@@ -16,7 +16,7 @@ def home(request):
     return render(request, 'home.html')
 
 @csrf_exempt
-def process_status_table(request,id=0):
+def process_status_table(request,id):
     if request.method=='GET':
         projects = Process.objects.all()
         return render(request, 'Displayprocess.html',{'projects':projects})
@@ -29,7 +29,7 @@ def process_status_table(request,id=0):
         return JsonResponse("Failed to Add",safe=False)
 
 @csrf_exempt
-def process_log_table(request,id=0):
+def process_log_table(request,id):
     if request.method=='GET':
         logtable = Reportings.objects.all()
         

@@ -21,10 +21,11 @@ from dashboard import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^',include('dashboard.urls')),
+    # re_path(r'^',include('dashboard.urls')),
     path('process', views.process_status_table , name='process'),
     path('log', views.process_log_table , name='log'),
     path('home/',views.home, name='home'),
     path('',views.home, name='home'),
-    path('linewebhook',views.linewebhook, name = 'linewebhook')
+    path('linewebhook',views.linewebhook, name = 'linewebhook'),
+    path('api/', include('dashboard.urls')),
 ]

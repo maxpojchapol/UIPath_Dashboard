@@ -31,7 +31,7 @@ if __name__ == "__main__":
             "forget to activate a virtual environment?"
         ) from exc
     settings.MY_BASE_URL = f'http://{get_ip()}:8000/'
-    print(settings.MY_BASE_URL + "minifig/")
+    print(settings.MY_BASE_URL)
     args = sys.argv
     args += [
         'runserver', '0.0.0.0:8000', '--noreload'
