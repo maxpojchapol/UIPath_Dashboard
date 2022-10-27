@@ -11,14 +11,6 @@ from Config.LineConfig import *
 from django.core.files.storage import default_storage
 import requests
 import json
-# Create your views here.
-# def displayprocess(request):
-#     projects = Process.objects.all()
-#     return render(request, 'Displayprocess.html',{'projects':projects})
-
-# def displayLog(request):
-#     logtable = Reportings.objects.all()
-#     return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 def home(request):
     return render(request, 'home.html')
