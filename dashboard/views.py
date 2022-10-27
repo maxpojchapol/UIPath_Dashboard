@@ -11,7 +11,7 @@ from Config.LineConfig import *
 from django.core.files.storage import default_storage
 import requests
 import json
-# Create your views here.
+# Create your views here
 def Displayprocess(request):
     projects = Process.objects.all()
     return render(request, 'Employee/Displayprocess.html',{'projects':projects})
