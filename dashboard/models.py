@@ -3,9 +3,9 @@ from django.db import models
 class Process(models.Model):
     id = models.AutoField(primary_key=True)
     process_name = models.CharField(max_length=500)
-    computer_name = models.CharField(max_length=500)
-    description = models.CharField(max_length=500)
-    status = models.IntegerField()
+    computer_name = models.CharField(max_length=500,null=True,blank=True)
+    description = models.CharField(max_length=500,null=True,blank=True)
+    status = models.IntegerField(null=True,blank=True)
     isrunning = models.BooleanField()
     customer_name = models.CharField(max_length=500)
 

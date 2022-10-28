@@ -21,8 +21,15 @@ def process_status_table(request,id):
         projects = Process.objects.all()
         return render(request, 'Displayprocess.html',{'projects':projects})
     if request.method=='POST':
-        process_data=JSONParser().parse(request)
-        process_serializer=ProcessSerializer(data=process_data)
+        json_data=JSONParser().parse(request)
+        process = Process.objects.filter(process_name= json_data["process_name"],computer_name= json_data["computer_name"]).first()
+        if process :
+            process["description"] = json_data["description"]
+            process["status"] = json_data["status"]
+            process["isrunning"] = json_data["isrunning"]
+            process["customer_name"] = json_data["customer_name"]
+            return JsonResponse("Changed Successfully",safe=False)
+        process_serializer=ProcessSerializer(data=json_data)
         if process_serializer.is_valid():
             process_serializer.save()
             return JsonResponse("Added Successfully",safe=False)
