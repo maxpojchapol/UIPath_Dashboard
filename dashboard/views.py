@@ -17,10 +17,12 @@ def home(request):
     return render(request, 'home.html')
 
 @csrf_exempt
-def process_status_table(request,id):
+def process_status_table(request):
     if request.method=='GET':
         projects = Process.objects.all()
         return render(request, 'Displayprocess.html',{'projects':projects})
+    
+def update_status(request):
     if request.method=='POST':
         process_data=JSONParser().parse(request)
         process_serializer=ProcessSerializer(data=process_data)
@@ -30,7 +32,7 @@ def process_status_table(request,id):
         return JsonResponse("Failed to Add",safe=False)
 
 @csrf_exempt
-def process_log_table(request):
+def process_log_table(request,customer):
     if request.method=='GET':
         
         logtable = Reportings.objects.all()
@@ -39,32 +41,31 @@ def process_log_table(request):
         log_data = []
 
         for log in logtable:
-            dict_data = {'process_name':log.process_id.process_name,
-                'computer_name':log.process_id.computer_name,
-                'customer_name': log.process_id.customer_name,
+            dict_data = {'process_name':log.process.process_name,
+                'computer_name':log.process.computer_name,
+                'customer_name': log.process.customer_name,
                 'timestamp':log.timestamp,
                 'comment': log.comment,
                 'reason': log.reason}
             log_data.append(dict_data)
 
         # เพิ่ม computer name กับ process name ในการ display
-        # computer name = process_id.computer_name
+        # computer name = process.computer_name
         return render(request, 'DisplayLog.html',{'logtable':log_data})
+    
+def add_log(request):
     if request.method=='POST':
-        # อ่าน body computer name กับ process name เพื่อไปหา Process object แล้ว save ลง process_id
-        # process_id = Process.object.filter(computhe_name = "" && )
+        # อ่าน body computer name กับ process name เพื่อไปหา Process object แล้ว save ลง process
+        # process = Process.object.filter(computhe_name = "" && )
         log_data=JSONParser().parse(request)
-        process_id = Process.objects.get(process_name=log_data["process_name"] , computer_name = log_data["computer_name"])
-        log_serializer=LogSerializer(data={'process_id': process_id.pk,'timestamp':log_data["timestamp"],'comment':log_data["comment"],'reason':log_data["reason"]})
+        process = Process.objects.get(process_name=log_data["process_name"] , computer_name = log_data["computer_name"])
+        log_serializer=LogSerializer(data={'process': process.pk,'timestamp':log_data["timestamp"],'comment':log_data["comment"],'reason':log_data["reason"]})
 
         if log_serializer.is_valid():
             log_serializer.save()
             return JsonResponse("Added Successfully",safe=False)
         return JsonResponse(log_serializer.errors,safe=False)
-    # elif request.method=='GET':
-    #     allLog = Reportings.objects.all()
-    #     log_serializer=LogSerializer(allLog,many=True)
-    #     return JsonResponse(log_serializer.data,safe=False)
+    
 
 @csrf_exempt
 def linewebhook(request):

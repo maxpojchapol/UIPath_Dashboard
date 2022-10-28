@@ -11,7 +11,7 @@ class Process(models.Model):
 
 
 class Reportings(models.Model):
-    process_id = models.ForeignKey(Process, on_delete=models.CASCADE, null=False, blank=False)
+    process = models.ForeignKey(Process, on_delete=models.CASCADE, null=False, blank=False)
     timestamp = models.DateTimeField()
     comment = models.CharField(max_length=500) # How many transaction, error screenshot
     reason = models.CharField(max_length=500)  # Robot run successfully, Robot start running, Robot face the problem
