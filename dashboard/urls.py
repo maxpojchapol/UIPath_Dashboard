@@ -9,8 +9,9 @@ urlpatterns=[
     path('',views.home, name='home'),
     
     path('process/', views.process_status_table , name='process'),
-    path('log/<str:customer>', views.process_log_table , name='log'),
+    path('log/', views.process_log_table , name='log'),
     path('linewebhook/',views.linewebhook, name = 'linewebhook'),
+    path('checkrunning/',views.checkrunning, name = 'checkrunning'),
 
     path('api/updatestatus/',views.update_status, name='update_status'),
     path('api/addlog/', views.add_log , name='addlog'),
