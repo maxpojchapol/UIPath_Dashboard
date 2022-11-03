@@ -1,4 +1,5 @@
 from formatter import test
+from http.client import HTTPResponse
 from os import abort
 from traceback import print_tb
 from xmlrpc.client import DateTime
@@ -15,6 +16,9 @@ from django.core.files.storage import default_storage
 import requests
 import json
 import datetime
+# from datetime import timedelta
+from django.utils import timezone
+
 
 def home(request):
     return render(request, 'home.html')
@@ -76,7 +80,7 @@ def add_log(request,jsonparser):
         # log_data=JSONParser().parse(request)
         log_data = jsonparser
         process = Process.objects.get(process_name=log_data["process_name"] , computer_name = log_data["computer_name"])
-        log_serializer=LogSerializer(data={'process': process.pk,'timestamp':str(datetime.datetime.now()),'comment':log_data["comment"],'reason':log_data["reason"]})
+        log_serializer=LogSerializer(data={'process': process.pk,'timestamp':datetime.datetime.now(),'comment':log_data["comment"],'reason':log_data["reason"]})
 
         if log_serializer.is_valid():
             log_serializer.save()
@@ -88,7 +92,8 @@ def add_log(request,jsonparser):
 def linewebhook(request):
     if request.method == 'POST':
         print(request.body.decode())
-        NotifyMessage()
+        # message = "test"
+        # NotifyMessage(message)
         return JsonResponse(200,safe=False)
     if request.method == 'GET':
         return JsonResponse("Get method",safe=False)
@@ -98,7 +103,7 @@ def linewebhook(request):
 def NotifyMessage(message):
     LINE_API = 'https://api.line.me/v2/bot/message/push'
 
-    Authorization = 'Bearer {}'.format(Line_accesstoken) ##ที่ยาวๆ
+    Authorization = 'Bearer {}'.format(Line_accesstoken) 
     print(Authorization)
     headers = {
         'Content-Type': 'application/json; charset=UTF-8',
@@ -119,8 +124,20 @@ def NotifyMessage(message):
 
 @csrf_exempt
 def checkrunning(request):
-    report = Reportings.objects.filter(process__process_name= "process_test_line",process__computer_name= "computer_test_line")
-    print("test")
+    json_data=JSONParser().parse(request)
+    report_last = Reportings.objects.filter(process__process_name= json_data["process_name"],process__computer_name= json_data["computer_test_line"]).last()
+    if (report_last.process.isrunning):
+        message = "process still running since " +(report_last.timestamp).strftime("%d-%m-%Y %H:%M:%S")
+        NotifyMessage(message)    
+    elif (timezone.make_naive(report_last.timestamp) < (datetime.datetime.now()-datetime.timedelta(hours=1))):
+        print("process is not running")
+        message = "process is not running the lastest run was on "+ (report_last.timestamp).strftime("%d-%m-%Y %H:%M:%S")
+        NotifyMessage(message)
+
+    return JsonResponse("Report successfully",safe=False)
+    # else:
+    #     message = "process is successful running"
+    #     # NotifyMessage(message)
 
 @csrf_exempt
 def SaveFile(request):

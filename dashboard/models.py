@@ -9,6 +9,8 @@ class Process(models.Model):
     isrunning = models.BooleanField()
     customer_name = models.CharField(max_length=500)
 
+    def __str__(self):
+        return f'{self.process_name}'
 
 class Reportings(models.Model):
     process = models.ForeignKey(Process, on_delete=models.CASCADE, null=False, blank=False)
@@ -16,4 +18,7 @@ class Reportings(models.Model):
     comment = models.CharField(max_length=500) # How many transaction, error screenshot
     reason = models.CharField(max_length=500)  # Robot run successfully, Robot start running, Robot face the problem
     
+    def __str__(self):
+        return f'{self.process.process_name}'
 
+class Process_check_setting(models.Model):
