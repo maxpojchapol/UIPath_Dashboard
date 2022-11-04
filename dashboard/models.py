@@ -21,4 +21,4 @@ class Reportings(models.Model):
     def __str__(self):
         return f'{self.process.process_name}'
 
-class Process_check_setting(models.Model):
+# class Process_check_setting(models.Model):

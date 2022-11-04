@@ -51,7 +51,7 @@ def update_status(request):
         return JsonResponse("Failed to Add",safe=False)
 
 @csrf_exempt
-def process_log_table(request):
+def process_log_table(request,customer):
     if request.method=='GET':
         
         logtable = Reportings.objects.all()
@@ -60,13 +60,14 @@ def process_log_table(request):
         log_data = []
 
         for log in logtable:
-            dict_data = {'process_name':log.process.process_name,
-                'computer_name':log.process.computer_name,
-                'customer_name': log.process.customer_name,
-                'timestamp':log.timestamp,
-                'comment': log.comment,
-                'reason': log.reason}
-            log_data.append(dict_data)
+            if log.process.customer_name == customer:
+                dict_data = {'process_name':log.process.process_name,
+                    'computer_name':log.process.computer_name,
+                    'customer_name': log.process.customer_name,
+                    'timestamp':log.timestamp,
+                    'comment': log.comment,
+                    'reason': log.reason}
+                log_data.append(dict_data)
 
         # เพิ่ม computer name กับ process name ในการ display
         # computer name = process.computer_name
