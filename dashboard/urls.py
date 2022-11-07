@@ -5,14 +5,15 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns=[
-    # re_path(r'^department$',views.departmentApi),
-    # re_path(r'^department/([0-9]+)$',views.departmentApi),
 
-    # re_path(r'^employee$',views.employeeApi),
-    # re_path(r'^employee/([0-9]+)$',views.employeeApi),
+    path('',views.home, name='home'),
+    
+    path('process/', views.process_status_table , name='process'),
+    path('log/<str:customer>/', views.process_log_table , name='log'),
+    path('linewebhook/',views.linewebhook, name = 'linewebhook'),
+    path('checkrunning/',views.checkrunning, name = 'checkrunning'),
 
-    path('process1/<int:id>/',views.process_status_table, name='process_status_table'),
-    re_path(r'^addlog$',views.process_log_table),
-
-    # re_path(r'^employee/savefile',views.SaveFile)
+    path('api/updatestatus/',views.update_status, name='update_status'),
+    path('api/addlog/', views.add_log , name='addlog'),
+    
     ]

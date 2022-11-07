@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
                 ('timestamp', models.DateTimeField()),
                 ('comment', models.CharField(max_length=500)),
                 ('reason', models.CharField(max_length=500)),
-                ('process_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dashboard.process')),
+                ('process', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='dashboard.process')),
             ],
         ),
     ]

@@ -19,4 +19,4 @@ class ProcessSerializer(serializers.ModelSerializer):
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model=Reportings
-        fields=('process_id','timestamp','comment','reason')
+        fields=('process','timestamp','comment','reason')
