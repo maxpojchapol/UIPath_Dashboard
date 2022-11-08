@@ -21,8 +21,7 @@ the folder fixtures in the dashboard app will contain files to fill the db with 
 data should be altered (the dates to match the current date)
 
 ```
-py manage.py loaddata process.json
-py manage.py loaddata reportings.json
+py manage.py loaddata sampledata.json
 ```
 
 
