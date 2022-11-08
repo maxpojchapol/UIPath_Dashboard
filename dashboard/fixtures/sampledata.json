@@ -1,0 +1,48 @@
+[
+    {
+      "model": "dashboard.process",
+      "pk": 1,
+      "fields": {
+        "process_name": "GW Process 1",
+        "computer_name": "prod",
+        "description": "test process GW 1",
+        "status": 1,
+        "isrunning": false,
+        "customer_name": "Griffwerk"
+        
+      }
+    },
+    {
+      "model": "dashboard.process",
+      "pk": 2,
+      "fields": {
+        "process_name": "HA Process 1",
+        "computer_name": "some VM",
+        "description": "test process HA 1",
+        "status": 1,
+        "isrunning": false,
+        "customer_name": "Hafele"
+      }
+    },
+    {
+      "model": "dashboard.reportings",
+      "fields": {
+        "process": 1,
+        "comment": "some comment",
+        "reason": "reason",
+        "robot_timestamp": "2022-11-08T13:20:30+03:00",
+        "server_timestamp": "2011-11-08T13:40:30+00:00"
+        
+      }
+    },
+    {
+      "model": "dashboard.reportings",
+      "fields": {
+        "process": 1,
+        "comment": "some comment",
+        "reason": "reason",
+        "robot_timestamp": "2022-11-08T13:20:30+03:00",
+        "server_timestamp": "2011-11-08T13:20:25+00:00"
+      }
+    }
+  ]
