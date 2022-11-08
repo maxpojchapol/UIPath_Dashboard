@@ -11,12 +11,21 @@ from dashboard.models import *
 #         model=Employees
 #         fields=('EmployeeId','EmployeeName','Department','DateOfJoining','PhotoFileName')
 
+
 class ProcessSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Process
-        fields=('process_name','computer_name','description','status','isrunning','customer_name')
+        model = Process
+        fields = (
+            "process_name",
+            "computer_name",
+            "description",
+            "status",
+            "isrunning",
+            "customer_name",
+        )
+
 
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
-        model=Reportings
-        fields=('process','timestamp','comment','reason')
+        model = Reportings
+        fields = ("process", "server_timestamp", "robot_timestamp", "comment", "reason")

@@ -82,7 +82,7 @@ def process_log_table(request, customer):
                     "process_name": log.process.process_name,
                     "computer_name": log.process.computer_name,
                     "customer_name": log.process.customer_name,
-                    "timestamp": log.timestamp,
+                    "timestamp": log.server_timestamp,
                     "comment": log.comment,
                     "reason": log.reason,
                 }
@@ -156,16 +156,16 @@ def checkrunning(request):
         process__computer_name=json_data["computer_test_line"],
     ).last()
     if report_last.process.isrunning:
-        message = "process still running since " + (report_last.timestamp).strftime(
-            "%d-%m-%Y %H:%M:%S"
-        )
+        message = "process still running since " + (
+            report_last.server_timestamp
+        ).strftime("%d-%m-%Y %H:%M:%S")
         NotifyMessage(message)
-    elif timezone.make_naive(report_last.timestamp) < (
+    elif timezone.make_naive(report_last.server_timestamp) < (
         datetime.datetime.now() - datetime.timedelta(hours=1)
     ):
         print("process is not running")
         message = "process is not running the lastest run was on " + (
-            report_last.timestamp
+            report_last.server_timestamp
         ).strftime("%d-%m-%Y %H:%M:%S")
         NotifyMessage(message)
 
