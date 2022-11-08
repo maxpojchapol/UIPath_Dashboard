@@ -1,0 +1,27 @@
+[
+    {
+      "model": "dashboard.process",
+      "pk": 1,
+      "fields": {
+        "process_name": "GW Process 1",
+        "computer_name": "prod",
+        "description": "test process GW 1",
+        "status": 1,
+        "isrunning": false,
+        "customer_name": "Griffwerk"
+        
+      }
+    },
+    {
+      "model": "dashboard.process",
+      "pk": 2,
+      "fields": {
+        "process_name": "HA Process 1",
+        "computer_name": "some VM",
+        "description": "test process HA 1",
+        "status": 1,
+        "isrunning": false,
+        "customer_name": "Hafele"
+      }
+    }
+  ]
