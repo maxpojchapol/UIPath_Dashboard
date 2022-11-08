@@ -54,24 +54,25 @@ def update_status(request):
 def process_log_table(request,customer):
     if request.method=='GET':
         
+        logtable = Reportings.objects.filter(process__customer_name = customer)
+        
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
+
+@csrf_exempt
+def process_view_log(request,customer,process_name):
+    if request.method=='GET':
+        
+        logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
+        
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
+
+@csrf_exempt
+def all_log(request,customer,process_name):
+    if request.method=='GET':
+        
         logtable = Reportings.objects.all()
-        # log_serializer=LogSerializer(logtable,many=True)
-        # return JsonResponse(log_serializer.data,safe=False)
-        log_data = []
-
-        for log in logtable:
-            if log.process.customer_name == customer:
-                dict_data = {'process_name':log.process.process_name,
-                    'computer_name':log.process.computer_name,
-                    'customer_name': log.process.customer_name,
-                    'timestamp':log.timestamp,
-                    'comment': log.comment,
-                    'reason': log.reason}
-                log_data.append(dict_data)
-
-        # เพิ่ม computer name กับ process name ในการ display
-        # computer name = process.computer_name
-        return render(request, 'DisplayLog.html',{'logtable':log_data})
+        
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 @csrf_exempt    
 def add_log(request,jsonparser):
