@@ -108,6 +108,8 @@ def add_log(request,jsonparser):
                 "timestamp": datetime.datetime.now(),
                 "comment": log_data["comment"],
                 "reason": log_data["reason"],
+                "server_timestamp": log_data["server_timestamp"],
+                "robot_timestamp": log_data["robot_timestamp"]
             }
         )
 
@@ -115,6 +117,9 @@ def add_log(request,jsonparser):
             log_serializer.save()
             return JsonResponse("Added Successfully", safe=False)
         return JsonResponse(log_serializer.errors, safe=False)
+    elif request.method=='GET':
+        logtable = Reportings.objects.all()
+        return JsonResponse(logtable, safe=False)
 
 
 @csrf_exempt

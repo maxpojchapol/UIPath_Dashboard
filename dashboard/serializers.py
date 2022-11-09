@@ -28,4 +28,9 @@ class ProcessSerializer(serializers.ModelSerializer):
 class LogSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reportings
-        fields = ("process", "server_timestamp", "robot_timestamp", "comment", "reason")
+        fields = (
+            "process", 
+            "server_timestamp", 
+            "robot_timestamp", 
+            "comment", 
+            "reason")
