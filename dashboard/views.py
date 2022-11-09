@@ -68,38 +68,41 @@ def update_status(request):
 
 
 @csrf_exempt
-def process_log_table(request, customer):
-    if request.method == "GET":
-
-        logtable = Reportings.objects.all()
-        # log_serializer=LogSerializer(logtable,many=True)
-        # return JsonResponse(log_serializer.data,safe=False)
-        log_data = []
-
-        for log in logtable:
-            if log.process.customer_name == customer:
-                dict_data = {
-                    "process_name": log.process.process_name,
-                    "computer_name": log.process.computer_name,
-                    "customer_name": log.process.customer_name,
-                    "timestamp": log.server_timestamp,
-                    "comment": log.comment,
-                    "reason": log.reason,
-                }
-                log_data.append(dict_data)
-
-        # เพิ่ม computer name กับ process name ในการ display
-        # computer name = process.computer_name
-        return render(request, "DisplayLog.html", {"logtable": log_data})
-
+def process_log_table(request,customer):
+    if request.method=='GET':
+        
+        logtable = Reportings.objects.filter(process__customer_name = customer)
+        
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 @csrf_exempt
-def add_log(request, jsonparser):
-    if request.method == "POST":
+def process_view_log(request,customer,process_name):
+    if request.method=='GET':
+        
+        logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
+        
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
+
+@csrf_exempt
+def all_log(request,customer,process_name):
+    if request.method=='GET':
+        
+        logtable = Reportings.objects.all()
+        
+        return render(request, 'DisplayLog.html',{'logtable':logtable})
+
+@csrf_exempt    
+def add_log(request,jsonparser=False):
+    if request.method=='POST':
         # อ่าน body computer name กับ process name เพื่อไปหา Process object แล้ว save ลง process
         # process = Process.object.filter(computhe_name = "" && )
         # log_data=JSONParser().parse(request)
-        log_data = jsonparser
+        if not jsonparser :
+            log_data = JSONParser().parse(request)
+            
+        else:
+            log_data = jsonparser
+
         process = Process.objects.get(
             process_name=log_data["process_name"],
             computer_name=log_data["computer_name"],
@@ -110,6 +113,8 @@ def add_log(request, jsonparser):
                 "timestamp": datetime.datetime.now(),
                 "comment": log_data["comment"],
                 "reason": log_data["reason"],
+                "server_timestamp": log_data["server_timestamp"],
+                "robot_timestamp": log_data["robot_timestamp"]
             }
         )
 
@@ -117,6 +122,9 @@ def add_log(request, jsonparser):
             log_serializer.save()
             return JsonResponse("Added Successfully", safe=False)
         return JsonResponse(log_serializer.errors, safe=False)
+    elif request.method=='GET':
+        logtable = Reportings.objects.all()
+        return JsonResponse(logtable, safe=False)
 
 
 @csrf_exempt
