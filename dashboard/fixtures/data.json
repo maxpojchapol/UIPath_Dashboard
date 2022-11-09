@@ -1,0 +1,626 @@
+[
+    {
+        "model": "dashboard.process",
+        "pk": 1,
+        "fields": {
+            "process_name": "GW 1",
+            "computer_name": "computer name GW",
+            "description": "description GW",
+            "status": 1,
+            "isrunning": false,
+            "customer_name": "Griffwerk"
+        }
+    },
+    {
+        "model": "dashboard.process",
+        "pk": 2,
+        "fields": {
+            "process_name": "HA 1",
+            "computer_name": "computer name HA",
+            "description": "description HA",
+            "status": 1,
+            "isrunning": false,
+            "customer_name": "Hafele"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T13:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T06:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T14:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T07:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T15:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T08:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T16:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T09:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T17:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T10:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T18:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T11:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T19:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T12:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T20:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T13:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T21:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T14:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T22:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T15:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T13:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T06:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T14:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T07:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T15:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T08:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T16:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T09:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T17:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T10:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T18:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T11:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T19:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T12:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T20:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T13:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T21:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T14:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 1,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T22:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T15:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T03:29:02.351515+03:00",
+            "server_timestamp": "2022-11-07T20:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T04:29:02.351515+03:00",
+            "server_timestamp": "2022-11-07T21:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T05:29:02.351515+03:00",
+            "server_timestamp": "2022-11-07T22:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T06:29:02.351515+03:00",
+            "server_timestamp": "2022-11-07T23:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T07:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T00:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T08:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T01:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T09:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T02:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T10:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T03:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T11:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T04:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T12:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T05:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T13:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T06:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T14:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T07:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T15:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T08:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T16:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T09:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T17:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T10:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T18:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T11:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T19:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T12:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T20:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T13:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T21:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T14:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-08T22:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T15:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T03:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T20:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T04:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T21:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T05:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T22:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T06:29:02.351515+03:00",
+            "server_timestamp": "2022-11-08T23:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T07:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T00:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T08:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T01:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T09:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T02:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T10:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T03:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T11:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T04:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T12:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T05:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T13:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T06:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T14:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T07:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T15:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T08:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T16:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T09:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T17:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T10:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T18:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T11:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T19:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T12:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T20:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T13:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T21:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T14:29:02.351515+00:00"
+        }
+    },
+    {
+        "model": "dashboard.reportings",
+        "fields": {
+            "process": 2,
+            "comment": "some comment",
+            "reason": "reason",
+            "robot_timestamp": "2022-11-09T22:29:02.351515+03:00",
+            "server_timestamp": "2022-11-09T15:29:02.351515+00:00"
+        }
+    }
+]
