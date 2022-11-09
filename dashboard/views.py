@@ -92,12 +92,17 @@ def all_log(request,customer,process_name):
         return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 @csrf_exempt    
-def add_log(request,jsonparser):
+def add_log(request,jsonparser=False):
     if request.method=='POST':
         # อ่าน body computer name กับ process name เพื่อไปหา Process object แล้ว save ลง process
         # process = Process.object.filter(computhe_name = "" && )
         # log_data=JSONParser().parse(request)
-        log_data = jsonparser
+        if not jsonparser :
+            log_data = JSONParser().parse(request)
+            
+        else:
+            log_data = jsonparser
+
         process = Process.objects.get(
             process_name=log_data["process_name"],
             computer_name=log_data["computer_name"],
