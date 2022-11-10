@@ -25,12 +25,16 @@ th, td {
       </tr>
     {% for project in projects %}
       <tr>
-        <td>{{ project.process_name }}</td>
+        
+        <td>
+        <a href="../log/"onclick="location.href=this.href+'{{ project.customer_name }}'+'/'+'{{ project.process_name }}'+'/';return false;">
+          {{ project.process_name }}</a></td>
         <td>{{ project.computer_name }}</td>
         <td>{{ project.description }}</td>
         <td>{{ project.status }}</td>
         <td>{{ project.isrunning }}</td>
         <td>{{ project.customer_name }}</td>
+        
       </tr>
 
     {% endfor %}

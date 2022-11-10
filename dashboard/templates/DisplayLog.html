@@ -25,9 +25,9 @@ th, td {
       </tr>
     {% for log in logtable %}
       <tr>
-        <td>{{ log.process_name }}</td>
-        <td>{{ log.computer_name }}</td>
-        <td>{{ log.customer_name }}</td>
+        <td>{{ log.process.process_name }}</td>
+        <td>{{ log.process.computer_name }}</td>
+        <td>{{ log.process.customer_name }}</td>
         <td>{{ log.timestamp }}</td>
         <td>{{ log.comment }}</td>
         <td>{{ log.reason }}</td>
