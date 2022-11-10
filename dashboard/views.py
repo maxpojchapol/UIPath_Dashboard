@@ -16,10 +16,10 @@ from django.core.files.storage import default_storage
 import requests
 import json
 import datetime
+from dashboard.checks.run_checks import check_bots
 
 # from datetime import timedelta
 from django.utils import timezone
-from checks import *
 
 
 def home(request):
@@ -183,14 +183,18 @@ def SaveFile(request):
 
 
 def run_checks(request):
-    gt = Reportings.objects.filter(
-        server_timestamp__gte=datetime.datetime.now(timezone.utc)
-        - datetime.timedelta(days=2),
-        process__id=1,
-    )
-    lt = Reportings.objects.filter(
-        server_timestamp__lte=datetime.datetime.now(timezone.utc)
-        - datetime.timedelta(days=2),
-        process__id=1,
-    )
-    print
+    reports = Reportings.objects.all()
+    process = Process.objects.all()
+    res = check_bots(reports, process)
+    # gt = Reportings.objects.filter(
+    #     server_timestamp__gte=datetime.datetime.now(timezone.utc)
+    #     - datetime.timedelta(days=2),
+    #     process__id=1,
+    # )
+    # lt = Reportings.objects.filter(
+    #     server_timestamp__lte=datetime.datetime.now(timezone.utc)
+    #     - datetime.timedelta(days=2),
+    #     process__id=1,
+    # )
+
+    return JsonResponse(res, safe=False)
