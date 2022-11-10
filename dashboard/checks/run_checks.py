@@ -9,12 +9,23 @@ def check_bots(reports, process):
         server_timestamp__lte=datetime.datetime.now(timezone.utc)
         - datetime.timedelta(days=1)
     )
+    last_hour = reports.filter(
+        server_timestamp__gte=datetime.datetime.now(timezone.utc)
+        - datetime.timedelta(hours=1)
+    )
 
     for check in CHECKS:
         if check.get("daily_expected"):
             daily_check(check, last_24, process)
+        if check.get("hourly_expected"):
+            hourly_check(check, last_hour, process)
 
     return results
+
+
+def hourly_check(check, last_hour, process):
+
+    print
 
 
 def daily_check(check, last_24, process):
