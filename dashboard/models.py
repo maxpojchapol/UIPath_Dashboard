@@ -23,7 +23,7 @@ class Reportings(models.Model):
         max_length=500
     )  # Robot run successfully, Robot start running, Robot face the problem
     robot_timestamp = models.DateTimeField()
-    server_timestamp = models.DateTimeField()  # auto_now=True for running the server
+    server_timestamp = models.DateTimeField(auto_now=True)  # auto_now=True for running the server
 
     def __str__(self):
         return f"{self.process.process_name}"

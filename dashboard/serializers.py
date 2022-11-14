@@ -30,7 +30,6 @@ class LogSerializer(serializers.ModelSerializer):
         model = Reportings
         fields = (
             "process", 
-            "server_timestamp", 
             "robot_timestamp", 
             "comment", 
             "reason")

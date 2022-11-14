@@ -113,7 +113,6 @@ def add_log(request,jsonparser=False):
                 "timestamp": datetime.datetime.now(),
                 "comment": log_data["comment"],
                 "reason": log_data["reason"],
-                "server_timestamp": log_data["server_timestamp"],
                 "robot_timestamp": log_data["robot_timestamp"]
             }
         )
