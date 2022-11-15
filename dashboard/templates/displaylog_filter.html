@@ -1,0 +1,64 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<html>
+  <head>
+    <style>
+      table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+    </style>
+  </head>
+  <body>
+
+    <h1>Display process</h1>
+    <br>
+    <form name="date-range-form" id="date-range-form" action="{% url 'concerts:date_filter' %}" method="GET">
+    <h1>Select date for filter</h1>
+    <div id="datefilter-container">
+        <p class="js-command">Filter shows by date &#8595;</p>
+        <div id="datefilter">
+          <form name="date-range-form" id="date-range-form"
+                action="{% url 'concerts:date_filter' %}" method="GET">
+            <label for="start">Start date:</label>
+            <input type="date" id="start" name="start">
+            <label for="end">End date:</label>
+            <input type="date" id="end" name="end">
+            <button type="submit" name="date_filter">Submit</button>
+          </form>
+        </div>
+      </div>
+    </form>
+    <table style="width:100%">
+      <tr>
+        <th>Robot timestamp</th>
+        <th>Sever timestamp(UTC)</th>
+        <th>Process Name</th>
+        <th>Computer Name</th>
+        <th>Customer Name</th>
+        <th>comment</th>
+        <th>reason</th>
+        <th>Transaction amount</th>
+        <th>Robot runtime</th>
+      </tr>
+    {% for log in logtable %}
+      <tr>
+        <td>{{ log.robot_timestamp }}</td>
+        <td>{{ log.server_timestamp }}</td>
+        <td>{{ log.process.process_name }}</td>
+        <td>{{ log.process.computer_name }}</td>
+        <td>{{ log.process.customer_name }}</td>
+        <td>{{ log.comment }}</td>
+        <td>{{ log.reason }}</td>
+        <td>{{ log.transaction_amount }}</td>
+        <td>{{ log.robot_runtime }}</td>
+      </tr>
+
+    {% endfor %}
+    </table>
+  </body>
+</html>
+{% endblock %}

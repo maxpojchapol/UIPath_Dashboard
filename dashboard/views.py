@@ -76,12 +76,12 @@ def process_log_table(request,customer):
         return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 @csrf_exempt
-def process_view_log(request,customer,process_name):
+def process_view_log(request,customer,process_name,date_from=False,date_to=False):
     if request.method=='GET':
-        
         logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
-        
-        return render(request, 'DisplayLog.html',{'logtable':logtable})
+        if date_from & date_to:
+            print("")
+    return render(request, 'DisplayLog_filter.html',{'logtable':logtable})
 
 @csrf_exempt
 def all_log(request):
