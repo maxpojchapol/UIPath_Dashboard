@@ -23,6 +23,8 @@ th, td {
         <th>Customer Name</th>
         <th>comment</th>
         <th>reason</th>
+        <th>Transaction amount</th>
+        <th>Robot runtime</th>
       </tr>
     {% for log in logtable %}
       <tr>
@@ -33,6 +35,8 @@ th, td {
         <td>{{ log.process.customer_name }}</td>
         <td>{{ log.comment }}</td>
         <td>{{ log.reason }}</td>
+        <td>{{ log.transaction_amount }}</td>
+        <td>{{ log.robot_runtime }}</td>
       </tr>
 
     {% endfor %}

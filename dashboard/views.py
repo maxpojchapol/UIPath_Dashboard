@@ -84,7 +84,7 @@ def process_view_log(request,customer,process_name):
         return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 @csrf_exempt
-def all_log(request,customer,process_name):
+def all_log(request):
     if request.method=='GET':
         
         logtable = Reportings.objects.all()
@@ -113,7 +113,9 @@ def add_log(request,jsonparser=False):
                 "timestamp": datetime.datetime.now(),
                 "comment": log_data["comment"],
                 "reason": log_data["reason"],
-                "robot_timestamp": log_data["robot_timestamp"]
+                "robot_timestamp": log_data["robot_timestamp"],
+                "transaction_amount" : log_data["transaction_amount"],
+                "robot_runtime" : log_data["robot_runtime"]
             }
         )
 
