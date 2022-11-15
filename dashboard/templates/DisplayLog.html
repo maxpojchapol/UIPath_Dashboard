@@ -16,21 +16,27 @@ th, td {
     <h1>Display process</h1>
     <table style="width:100%">
       <tr>
+        <th>Robot timestamp</th>
+        <th>Sever timestamp(UTC)</th>
         <th>Process Name</th>
         <th>Computer Name</th>
         <th>Customer Name</th>
-        <th>timestamp</th>
         <th>comment</th>
         <th>reason</th>
+        <th>Transaction amount</th>
+        <th>Robot runtime</th>
       </tr>
     {% for log in logtable %}
       <tr>
+        <td>{{ log.robot_timestamp }}</td>
+        <td>{{ log.server_timestamp }}</td>
         <td>{{ log.process.process_name }}</td>
         <td>{{ log.process.computer_name }}</td>
         <td>{{ log.process.customer_name }}</td>
-        <td>{{ log.timestamp }}</td>
         <td>{{ log.comment }}</td>
         <td>{{ log.reason }}</td>
+        <td>{{ log.transaction_amount }}</td>
+        <td>{{ log.robot_runtime }}</td>
       </tr>
 
     {% endfor %}

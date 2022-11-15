@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 
 class Process(models.Model):
@@ -23,7 +24,9 @@ class Reportings(models.Model):
         max_length=500
     )  # Robot run successfully, Robot start running, Robot face the problem
     robot_timestamp = models.DateTimeField()
-    server_timestamp = models.DateTimeField()  # auto_now=True for running the server
+    server_timestamp = models.DateTimeField(auto_now=True)  # auto_now=True for running the server
+    robot_runtime = models.DurationField(null=True,blank=True)
+    transaction_amount = models.IntegerField(null=True,blank=True)
 
     def __str__(self):
         return f"{self.process.process_name}"
