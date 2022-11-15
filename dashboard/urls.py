@@ -10,6 +10,7 @@ urlpatterns = [
     path("log/", views.all_log, name="alllog"),
     path("log/<str:customer>/", views.process_log_table, name="process_log_table"),
     path("log/<str:customer>/<str:process_name>/", views.process_view_log, name="process_view_log"),
+    path("log/<str:customer>/<str:process_name>/filter_date_range/", views.process_view_log, name="process_view_log"),
     path("linewebhook/", views.linewebhook, name="linewebhook"),
     path("checkrunning/", views.checkrunning, name="checkrunning"),
     path("api/updatestatus/", views.update_status, name="update_status"),

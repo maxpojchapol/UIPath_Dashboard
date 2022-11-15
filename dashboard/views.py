@@ -18,6 +18,8 @@ import json
 import datetime
 from dashboard.checks.run_checks import check_bots
 
+from django.db.models import Q
+
 # from datetime import timedelta
 from django.utils import timezone
 
@@ -76,12 +78,17 @@ def process_log_table(request,customer):
         return render(request, 'DisplayLog.html',{'logtable':logtable})
 
 @csrf_exempt
-def process_view_log(request,customer,process_name,date_from=False,date_to=False):
+def process_view_log(request,customer,process_name):
+    logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
     if request.method=='GET':
-        logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
-        if date_from & date_to:
-            print("")
-    return render(request, 'DisplayLog_filter.html',{'logtable':logtable})
+        return render(request, 'DisplayLog_filter.html',{'logtable':logtable})
+    else:
+        date_from = datetime.datetime.strptime(str(request.POST["date_from"]),"%Y-%m-%d")
+        date_to = datetime.datetime.strptime(str(request.POST["date_to"]),"%Y-%m-%d") 
+        logtable = logtable.filter(
+                Q(robot_timestamp__gte=date_from) & Q(robot_timestamp__lte=date_to+ datetime.timedelta(days=1))
+            )
+    return render(request, 'DisplayLog_filter.html',{'logtable':logtable, 'date_from':datetime.datetime.strftime(date_from,"%m/%d/%Y"),'date_to': datetime.datetime.strftime(date_to,"%m/%d/%Y")})
 
 @csrf_exempt
 def all_log(request):

@@ -11,27 +11,27 @@ th, td {
   background-color: #96D4D4;
 }
     </style>
+    <h1>Display process</h1>
   </head>
   <body>
-
-    <h1>Display process</h1>
     <br>
-    <form name="date-range-form" id="date-range-form" action="{% url 'concerts:date_filter' %}" method="GET">
-    <h1>Select date for filter</h1>
     <div id="datefilter-container">
-        <p class="js-command">Filter shows by date &#8595;</p>
+        <p class="js-command">Please select the date for filter </p>
         <div id="datefilter">
           <form name="date-range-form" id="date-range-form"
-                action="{% url 'concerts:date_filter' %}" method="GET">
+            method="post">
             <label for="start">Start date:</label>
-            <input type="date" id="start" name="start">
+            <input type="date" id="date_from" name="date_from">
             <label for="end">End date:</label>
-            <input type="date" id="end" name="end">
+            <input type="date" id="date_to" name="date_to">
             <button type="submit" name="date_filter">Submit</button>
           </form>
         </div>
       </div>
     </form>
+    {% if date_from %}
+    <p>Filtered date from {{date_from}} to date {{date_to}}</p>
+    {% endif %}
     <table style="width:100%">
       <tr>
         <th>Robot timestamp</th>
