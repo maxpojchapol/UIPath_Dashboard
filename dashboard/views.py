@@ -16,7 +16,7 @@ from django.core.files.storage import default_storage
 import requests
 import json
 import datetime
-from dashboard.checks.run_checks import check_bots
+from dashboard.checks.run_checks import *
 
 from django.db.models import Q
 
@@ -199,7 +199,7 @@ def SaveFile(request):
 
 
 def run_checks(request):
-    reports = Reportings.objects.all()
+    reports = Reportings.objects.filter(reason = "End Process")
     process = Process.objects.all()
     res = check_bots(reports, process)
     # gt = Reportings.objects.filter(
@@ -212,5 +212,12 @@ def run_checks(request):
     #     - datetime.timedelta(days=2),
     #     process__id=1,
     # )
+
+    return JsonResponse(res, safe=False)
+
+def hourly_run_checks(request):
+    reports = Reportings.objects.filter(reason = "Start run")
+    process = Process.objects.all()
+    res = hourly_check_bots(reports, process)
 
     return JsonResponse(res, safe=False)

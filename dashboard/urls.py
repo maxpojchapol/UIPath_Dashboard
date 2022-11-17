@@ -16,4 +16,5 @@ urlpatterns = [
     path("api/updatestatus/", views.update_status, name="update_status"),
     path("api/addlog/", views.add_log, name="add_log"),
     path("run_checks/", views.run_checks, name="run_checks"),
+    path("hourly_run_checks/", views.hourly_run_checks, name="hourly_run_checks"),
 ]

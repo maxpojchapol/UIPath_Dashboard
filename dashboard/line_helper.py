@@ -1,6 +1,8 @@
 from django.views.decorators.csrf import csrf_exempt
 from Config.LineConfig import *
 from django.http.response import JsonResponse
+import json
+import requests
 @csrf_exempt
 def linewebhook(request):
     if request.method == "POST":
