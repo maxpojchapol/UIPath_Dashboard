@@ -11,7 +11,7 @@ th, td {
   background-color: #96D4D4;
 }
     </style>
-    <h1>Display process</h1>
+    <h1>{{ process_name }} process</h1>
   </head>
   <body>
     <br>
@@ -28,10 +28,20 @@ th, td {
           </form>
         </div>
       </div>
-    </form>
+    
     {% if date_from %}
     <p>Filtered date from {{date_from}} to date {{date_to}}</p>
     {% endif %}
+
+    <label for="Time">Time per Transaction</label>
+    <input type="text" name="tpt" id="tpt">
+    <label for="valueph">Value / Hours</label>
+    <input type="text" name="value_per_hours" id="value_per_hours" onblur="calculate()">
+    <label for="time_save_display">Time save : </label>
+    <p id="time_save"></p>
+
+    
+
     <table style="width:100%">
       <tr>
         <th>Robot timestamp</th>
@@ -58,7 +68,30 @@ th, td {
       </tr>
 
     {% endfor %}
+      <tr>
+        <td colspan="7" align="center">Total Transaction / Total Runtime  : </td>
+        <td id="total_transacetion">{{ total_transactions }}</td>
+        <td id="runtime_sum">{{ runtime_sum }}</td>
+      </tr>
     </table>
+
+    <script type="text/javascript">
+      var time_save=0;
+      var runtime_sum = document.getElementsByName('runtime_sum');
+      var total_transacetion = Number(document.getElementsByName('total_transacetion'));
+      const runtime_split = runtime_sum.split(":");
+
+      time_save = ((runtime_split[0]*60*60)+(runtime_split[1]*60)+(runtime_split[3]))*total_transacetion
+      document.getElementById('time_save').innerHTML = runtime_split;
+
+      function calculate(){
+          var tpt = document.getElementsByName('tpt');
+          var value = document.getElementsByName('value');
+          
+          
+      }
+      
+    </script>
   </body>
 </html>
 {% endblock %}

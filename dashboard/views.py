@@ -79,16 +79,37 @@ def process_log_table(request,customer):
 
 @csrf_exempt
 def process_view_log(request,customer,process_name):
+
     logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
+    process_name = process_name
     if request.method=='GET':
-        return render(request, 'DisplayLog_filter.html',{'logtable':logtable})
+        total_transactions = 0
+        mysum = datetime.timedelta()
+        for element in logtable:
+            (h, m, s) = str(element.robot_runtime).split(':')
+            d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=float(s))
+            mysum += d
+            if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
+                total_transactions += int(element.transaction_amount)
+        return render(request, 'DisplayLog_filter.html',{'runtime_sum':mysum ,'logtable':logtable , 'process_name':process_name, 'total_transactions': total_transactions })
     else:
         date_from = datetime.datetime.strptime(str(request.POST["date_from"]),"%Y-%m-%d")
         date_to = datetime.datetime.strptime(str(request.POST["date_to"]),"%Y-%m-%d") 
         logtable = logtable.filter(
                 Q(robot_timestamp__gte=date_from) & Q(robot_timestamp__lte=date_to+ datetime.timedelta(days=1))
             )
-    return render(request, 'DisplayLog_filter.html',{'logtable':logtable, 'date_from':datetime.datetime.strftime(date_from,"%m/%d/%Y"),'date_to': datetime.datetime.strftime(date_to,"%m/%d/%Y")})
+        total_transactions = 0
+        mysum = datetime.timedelta()
+        for element in logtable:
+            (h, m, s) = str(element.robot_runtime).split(':')
+            d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=float(s))
+            mysum += d
+            if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
+                total_transactions += int(element.transaction_amount)
+        
+        
+
+    return render(request, 'DisplayLog_filter.html',{'runtime_sum':mysum ,'logtable':logtable, 'process_name':process_name, 'total_transactions': total_transactions, 'date_from':datetime.datetime.strftime(date_from,"%m/%d/%Y"),'date_to': datetime.datetime.strftime(date_to,"%m/%d/%Y")})
 
 @csrf_exempt
 def all_log(request):
