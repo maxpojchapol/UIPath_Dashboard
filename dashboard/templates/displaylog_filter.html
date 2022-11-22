@@ -14,6 +14,7 @@ th, td {
     <h1>{{ process_name }} process</h1>
   </head>
   <body>
+    
     <br>
     <div id="datefilter-container">
         <p class="js-command">Please select the date for filter </p>
@@ -32,17 +33,20 @@ th, td {
     {% if date_from %}
     <p>Filtered date from {{date_from}} to date {{date_to}}</p>
     {% endif %}
-
-    <label for="Time">Time per Transaction</label>
-    <input type="text" name="tpt" id="tpt">
-    <label for="valueph">Value / Hours</label>
-    <input type="text" name="value_per_hours" id="value_per_hours" onblur="calculate()">
-    <label for="time_save_display">Time save : </label>
-    <p id="time_save"></p>
+    <br>
+    <label for="time_per_trans">Time / transaction:</label>
+    <input type="text" id="time_per_trans" name="time_per_trans" value="10">
+    <label for="value_per_hr">Value / Hours:</label>
+    <input type="text" id="value_per_hr" name="value_per_hr" value="20" onchange="calculate(this.value)"><br>
+    <p>Time save :</p>
+    <p id="time_save">0</p>
+    <p>Value Generate :</p>
+    <p id="value_generate">0</p>
 
     
+    
 
-    <table style="width:100%">
+    <table style="width:100%" id="log_table">
       <tr>
         <th>Robot timestamp</th>
         <th>Sever timestamp(UTC)</th>
@@ -68,30 +72,32 @@ th, td {
       </tr>
 
     {% endfor %}
-      <tr>
+      <tr id="summary">
         <td colspan="7" align="center">Total Transaction / Total Runtime  : </td>
-        <td id="total_transacetion">{{ total_transactions }}</td>
+        <td id="total_transaction">{{ total_transactions }}</td>
         <td id="runtime_sum">{{ runtime_sum }}</td>
       </tr>
     </table>
-
-    <script type="text/javascript">
-      var time_save=0;
-      var runtime_sum = document.getElementsByName('runtime_sum');
-      var total_transacetion = Number(document.getElementsByName('total_transacetion'));
-      const runtime_split = runtime_sum.split(":");
-
-      time_save = ((runtime_split[0]*60*60)+(runtime_split[1]*60)+(runtime_split[3]))*total_transacetion
-      document.getElementById('time_save').innerHTML = runtime_split;
-
-      function calculate(){
-          var tpt = document.getElementsByName('tpt');
-          var value = document.getElementsByName('value');
-          
-          
-      }
+    <script>
+      var runtime_all = document.getElementById("runtime_sum").textContent;
+      var total_transaction = document.getElementById("total_transaction").textContent;
+      var runtime_split = runtime_all.split(":");
+      var time_saved = Math.round(Number(runtime_split[0]*60*60)+Number(runtime_split[1]*60)+Number(runtime_split[2]))*total_transaction
+      var value_per_hr = document.getElementById("value_per_hr").value
+      var value_gen = 0
       
+      value_gen = (time_saved/3600)*20
+      document.getElementById("value_generate").innerHTML = value_gen;
+      document.getElementById("time_save").innerHTML = time_saved;
+
+      function calculate(val) {
+        value_gen = (time_saved/3600)*Number(val)
+        document.getElementById("value_generate").innerHTML = value_gen;
+      }
+ 
     </script>
+
+    
   </body>
 </html>
 {% endblock %}
