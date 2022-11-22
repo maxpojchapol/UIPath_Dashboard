@@ -37,14 +37,13 @@ th, td {
     <label for="time_per_trans">Time / transaction:</label>
     <input type="text" id="time_per_trans" name="time_per_trans" value="10">
     <label for="value_per_hr">Value / Hours:</label>
-    <input type="text" id="value_per_hr" name="value_per_hr" value="20" onchange="calculate(this.value)"><br>
-    <p>Time save :</p>
-    <p id="time_save">0</p>
-    <p>Value Generate :</p>
-    <p id="value_generate">0</p>
+    <input type="text" id="value_per_hr" name="value_per_hr" value="20" onchange="calculate(this.value)"><br><br>
 
-    
-    
+    <label for="time_save">Time saved :</label>
+    <input type="text" id="time_save" name="time_save" disabled>
+    <label for="value_generate">Value Generate :</label>
+    <input type="text" id="value_generate" name="value_generate" disabled><br><br>
+  
 
     <table style="width:100%" id="log_table">
       <tr>
@@ -87,12 +86,12 @@ th, td {
       var value_gen = 0
       
       value_gen = (time_saved/3600)*20
-      document.getElementById("value_generate").innerHTML = value_gen;
-      document.getElementById("time_save").innerHTML = time_saved;
+      document.getElementById("value_generate").value = value_gen;
+      document.getElementById("time_save").value = time_saved;
 
       function calculate(val) {
         value_gen = (time_saved/3600)*Number(val)
-        document.getElementById("value_generate").innerHTML = value_gen;
+        document.getElementById("value_generate").value = value_gen;
       }
  
     </script>
