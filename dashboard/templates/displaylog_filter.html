@@ -46,6 +46,11 @@ th, td {
   
 
     <table style="width:100%" id="log_table">
+      <tr id="summary">
+        <td colspan="7" align="center"><b> Transaction / Total Runtime  : </b></td>
+        <td id="total_transaction">{{ total_transactions }}</td>
+        <td id="runtime_sum">{{ runtime_sum }}</td>
+      </tr>
       <tr>
         <th>Robot timestamp</th>
         <th>Sever timestamp(UTC)</th>
@@ -71,17 +76,13 @@ th, td {
       </tr>
 
     {% endfor %}
-      <tr id="summary">
-        <td colspan="7" align="center">Total Transaction / Total Runtime  : </td>
-        <td id="total_transaction">{{ total_transactions }}</td>
-        <td id="runtime_sum">{{ runtime_sum }}</td>
-      </tr>
+      
     </table>
     <script>
       var runtime_all = document.getElementById("runtime_sum").textContent;
       var total_transaction = document.getElementById("total_transaction").textContent;
       var runtime_split = runtime_all.split(":");
-      var time_saved = Math.round(Number(runtime_split[0]*60*60)+Number(runtime_split[1]*60)+Number(runtime_split[2]))*total_transaction
+      var time_saved = document.getElementById("time_per_trans").value*total_transaction
       var value_per_hr = document.getElementById("value_per_hr").value
       var value_gen = 0
       
