@@ -16,7 +16,9 @@ from django.core.files.storage import default_storage
 import requests
 import json
 import datetime
-from dashboard.checks.run_checks import check_bots
+from dashboard.checks.run_checks import *
+
+from django.db.models import Q
 
 # from datetime import timedelta
 from django.utils import timezone
@@ -77,11 +79,37 @@ def process_log_table(request,customer):
 
 @csrf_exempt
 def process_view_log(request,customer,process_name):
+
+    logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
+    process_name = process_name
     if request.method=='GET':
+        total_transactions = 0
+        mysum = datetime.timedelta()
+        for element in logtable:
+            (h, m, s) = str(element.robot_runtime).split(':')
+            d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=float(s))
+            mysum += d
+            if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
+                total_transactions += int(element.transaction_amount)
+        return render(request, 'DisplayLog_filter.html',{'runtime_sum':mysum ,'logtable':logtable , 'process_name':process_name, 'total_transactions': total_transactions })
+    else:
+        date_from = datetime.datetime.strptime(str(request.POST["date_from"]),"%Y-%m-%d")
+        date_to = datetime.datetime.strptime(str(request.POST["date_to"]),"%Y-%m-%d") 
+        logtable = logtable.filter(
+                Q(robot_timestamp__gte=date_from) & Q(robot_timestamp__lte=date_to+ datetime.timedelta(days=1))
+            )
+        total_transactions = 0
+        mysum = datetime.timedelta()
+        for element in logtable:
+            (h, m, s) = str(element.robot_runtime).split(':')
+            d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=float(s))
+            mysum += d
+            if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
+                total_transactions += int(element.transaction_amount)
         
-        logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
         
-        return render(request, 'DisplayLog.html',{'logtable':logtable})
+
+    return render(request, 'DisplayLog_filter.html',{'runtime_sum':mysum ,'logtable':logtable, 'process_name':process_name, 'total_transactions': total_transactions, 'date_from':datetime.datetime.strftime(date_from,"%m/%d/%Y"),'date_to': datetime.datetime.strftime(date_to,"%m/%d/%Y")})
 
 @csrf_exempt
 def all_log(request):
@@ -192,7 +220,7 @@ def SaveFile(request):
 
 
 def run_checks(request):
-    reports = Reportings.objects.all()
+    reports = Reportings.objects.filter(reason = "End Process")
     process = Process.objects.all()
     res = check_bots(reports, process)
     # gt = Reportings.objects.filter(
@@ -205,5 +233,12 @@ def run_checks(request):
     #     - datetime.timedelta(days=2),
     #     process__id=1,
     # )
+
+    return JsonResponse(res, safe=False)
+
+def hourly_run_checks(request):
+    reports = Reportings.objects.filter(reason = "Start run")
+    process = Process.objects.all()
+    res = hourly_check_bots(reports, process)
 
     return JsonResponse(res, safe=False)

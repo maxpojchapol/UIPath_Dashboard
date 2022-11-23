@@ -1,0 +1,103 @@
+{% extends 'navbar.html' %}
+{% block content %}
+<html>
+  <head>
+    <style>
+      table, th, td {
+  border: 1px solid white;
+  border-collapse: collapse;
+}
+th, td {
+  background-color: #96D4D4;
+}
+    </style>
+    <h1>{{ process_name }} process</h1>
+  </head>
+  <body>
+    
+    <br>
+    <div id="datefilter-container">
+        <p class="js-command">Please select the date for filter </p>
+        <div id="datefilter">
+          <form name="date-range-form" id="date-range-form"
+            method="post">
+            <label for="start">Start date:</label>
+            <input type="date" id="date_from" name="date_from">
+            <label for="end">End date:</label>
+            <input type="date" id="date_to" name="date_to">
+            <button type="submit" name="date_filter">Submit</button>
+          </form>
+        </div>
+      </div>
+    
+    {% if date_from %}
+    <p>Filtered date from {{date_from}} to date {{date_to}}</p>
+    {% endif %}
+    <br>
+    <label for="time_per_trans">Time / transaction:</label>
+    <input type="text" id="time_per_trans" name="time_per_trans" value="10">
+    <label for="value_per_hr">Value / Hours:</label>
+    <input type="text" id="value_per_hr" name="value_per_hr" value="20" onchange="calculate(this.value)"><br><br>
+
+    <label for="time_save">Time saved :</label>
+    <input type="text" id="time_save" name="time_save" disabled>
+    <label for="value_generate">Value Generate :</label>
+    <input type="text" id="value_generate" name="value_generate" disabled><br><br>
+  
+
+    <table style="width:100%" id="log_table">
+      <tr id="summary">
+        <td colspan="7" align="center"><b> Transaction / Total Runtime  : </b></td>
+        <td id="total_transaction">{{ total_transactions }}</td>
+        <td id="runtime_sum">{{ runtime_sum }}</td>
+      </tr>
+      <tr>
+        <th>Robot timestamp</th>
+        <th>Sever timestamp(UTC)</th>
+        <th>Process Name</th>
+        <th>Computer Name</th>
+        <th>Customer Name</th>
+        <th>comment</th>
+        <th>reason</th>
+        <th>Transaction amount</th>
+        <th>Robot runtime</th>
+      </tr>
+    {% for log in logtable %}
+      <tr>
+        <td>{{ log.robot_timestamp }}</td>
+        <td>{{ log.server_timestamp }}</td>
+        <td>{{ log.process.process_name }}</td>
+        <td>{{ log.process.computer_name }}</td>
+        <td>{{ log.process.customer_name }}</td>
+        <td>{{ log.comment }}</td>
+        <td>{{ log.reason }}</td>
+        <td>{{ log.transaction_amount }}</td>
+        <td>{{ log.robot_runtime }}</td>
+      </tr>
+
+    {% endfor %}
+      
+    </table>
+    <script>
+      var runtime_all = document.getElementById("runtime_sum").textContent;
+      var total_transaction = document.getElementById("total_transaction").textContent;
+      var runtime_split = runtime_all.split(":");
+      var time_saved = document.getElementById("time_per_trans").value*total_transaction
+      var value_per_hr = document.getElementById("value_per_hr").value
+      var value_gen = 0
+      
+      value_gen = (time_saved/3600)*20
+      document.getElementById("value_generate").value = value_gen;
+      document.getElementById("time_save").value = time_saved;
+
+      function calculate(val) {
+        value_gen = (time_saved/3600)*Number(val)
+        document.getElementById("value_generate").value = value_gen;
+      }
+ 
+    </script>
+
+    
+  </body>
+</html>
+{% endblock %}
