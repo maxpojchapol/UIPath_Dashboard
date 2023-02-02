@@ -86,11 +86,12 @@ def process_view_log(request,customer,process_name):
         total_transactions = 0
         mysum = datetime.timedelta()
         for element in logtable:
-            (h, m, s) = str(element.robot_runtime).split(':')
-            d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=float(s))
-            mysum += d
-            if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
-                total_transactions += int(element.transaction_amount)
+            if element.robot_runtime:
+                (h, m, s) = str(element.robot_runtime).split(':')
+                d = datetime.timedelta(hours=int(h), minutes=int(m), seconds=float(s))
+                mysum += d
+                if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
+                    total_transactions += int(element.transaction_amount)
         return render(request, 'displaylog_filter.html',{'runtime_sum':mysum ,'logtable':logtable , 'process_name':process_name, 'total_transactions': total_transactions })
     else:
         date_from = datetime.datetime.strptime(str(request.POST["date_from"]),"%Y-%m-%d")
@@ -219,26 +220,25 @@ def SaveFile(request):
     return JsonResponse(file_name, safe=False)
 
 
+# This function is the daily check bot
 def run_checks(request):
-    reports = Reportings.objects.filter(reason = "End Process")
+    reports = Reportings.objects.filter(reason = "Start run")
     process = Process.objects.all()
     res = check_bots(reports, process)
-    # gt = Reportings.objects.filter(
-    #     server_timestamp__gte=datetime.datetime.now(timezone.utc)
-    #     - datetime.timedelta(days=2),
-    #     process__id=1,
-    # )
-    # lt = Reportings.objects.filter(
-    #     server_timestamp__lte=datetime.datetime.now(timezone.utc)
-    #     - datetime.timedelta(days=2),
-    #     process__id=1,
-    # )
-
     return JsonResponse(res, safe=False)
 
 def hourly_run_checks(request):
+    # Run checking that last hour has run or not
     reports = Reportings.objects.filter(reason = "Start run")
     process = Process.objects.all()
-    res = hourly_check_bots(reports, process)
+    results = hourly_check_bots(reports, process)
 
-    return JsonResponse(res, safe=False)
+    if len(results)>0:
+        for result in results:
+            NotifyMessage(result)
+
+    # Check that have error to be nofity or not
+    results=[]
+    results = hourly_check_error_bots(Reportings, Process)
+
+    return JsonResponse(results, safe=False)
