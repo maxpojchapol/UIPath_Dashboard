@@ -240,5 +240,8 @@ def hourly_run_checks(request):
     # Check that have error to be nofity or not
     results=[]
     results = hourly_check_error_bots(Reportings, Process)
+    if len(results)>0:
+        for result in results:
+            NotifyMessage(result)
 
     return JsonResponse(results, safe=False)
