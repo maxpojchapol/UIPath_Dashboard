@@ -8,6 +8,9 @@ class Process(models.Model):
     computer_name = models.CharField(max_length=500, null=True, blank=True)
     description = models.CharField(max_length=500, null=True, blank=True)
     status = models.IntegerField(null=True, blank=True)
+    # status 1 = success
+    # status 2 = common error
+    # status 3 = uncommon error
     isrunning = models.BooleanField()
     customer_name = models.CharField(max_length=500)
 
