@@ -17,15 +17,24 @@ import requests
 import json
 import datetime
 from dashboard.checks.run_checks import *
+from django.contrib.auth.decorators import login_required
 
 from django.db.models import Q
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import View
 # from datetime import timedelta
 from django.utils import timezone
 
 
 def home(request):
     return render(request, "home.html")
+
+@csrf_exempt
+@login_required()
+def process_status_table_griffwerk(request):
+    if request.method == "GET":
+        projects = Process.objects.filter(customer_name="Griffwerk")
+        return render(request, "Displayprocess.html", {"projects": projects})
 
 
 @csrf_exempt
@@ -74,6 +83,7 @@ def process_log_table(request,customer):
     if request.method=='GET':
 
         logtable = Reportings.objects.filter(process__customer_name = customer)
+        logtable = logtable[0:100]
 
         return render(request, 'DisplayLog.html',{'logtable':logtable})
 
@@ -81,6 +91,7 @@ def process_log_table(request,customer):
 def process_view_log(request,customer,process_name):
 
     logtable = Reportings.objects.filter(process__customer_name=customer,process__process_name=process_name)
+
     process_name = process_name
     if request.method=='GET':
         total_transactions = 0
@@ -92,6 +103,8 @@ def process_view_log(request,customer,process_name):
                 mysum += d
                 if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
                     total_transactions += int(element.transaction_amount)
+        if len(logtable)>100:
+            logtable = logtable[len(logtable)-100:len(logtable)-1]
         return render(request, 'displaylog_filter.html',{'runtime_sum':mysum ,'logtable':logtable , 'process_name':process_name, 'total_transactions': total_transactions })
     else:
         date_from = datetime.datetime.strptime(str(request.POST["date_from"]),"%Y-%m-%d")
@@ -108,8 +121,6 @@ def process_view_log(request,customer,process_name):
             if isinstance(str(element.transaction_amount), int) or str(element.transaction_amount).isdigit():
                 total_transactions += int(element.transaction_amount)
 
-
-
     return render(request, 'displaylog_filter.html',{'runtime_sum':mysum ,'logtable':logtable, 'process_name':process_name, 'total_transactions': total_transactions, 'date_from':datetime.datetime.strftime(date_from,"%m/%d/%Y"),'date_to': datetime.datetime.strftime(date_to,"%m/%d/%Y")})
 
 @csrf_exempt
@@ -117,6 +128,7 @@ def all_log(request):
     if request.method=='GET':
 
         logtable = Reportings.objects.all()
+        logtable = logtable[0:100]
 
         return render(request, 'DisplayLog.html',{'logtable':logtable})
 
