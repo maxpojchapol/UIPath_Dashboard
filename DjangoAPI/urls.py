@@ -24,4 +24,9 @@ urlpatterns = [
     # re_path(r'^',include('dashboard.urls')),
     
     path('', include('dashboard.urls')),
+    
+]
+
+urlpatterns+=[
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
