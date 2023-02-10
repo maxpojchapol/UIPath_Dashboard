@@ -56,11 +56,13 @@ def hourly_check(check, last_hours, expect_run, process,results):
     timeconvert = (datetime.datetime.combine(datetime.date(1,1,1),expect_run) + datetime.timedelta(hours=7)).time()
     if in_db < 1:
         results.append((f"""Notify_message hourly check
-Process {check["process"]}is not running, robot should run at {timeconvert}"""))
+Process {check["process"]} is not running, robot should run at {timeconvert}"""))
               
     else:
-        results.append((f"""Notify_message hourly check
-Process {check["process"]}is run normally at {timeconvert}"""))
+        print(f"""Notify_message hourly check
+# Process {check["process"]} is run normally at {timeconvert}""")
+#         results.append((f"""Notify_message hourly check
+# Process {check["process"]}is run normally at {timeconvert}"""))
         # print(
         #     f"""notify_message hourly check
         #       Process is running normally at : {last_run.server_timestamp}"""
@@ -77,7 +79,7 @@ def hourly_check_error_bots(Report,Process):
     report_last_hours_error = list(report_last_hours.filter(reason__contains="Error"))
     for item in report_last_hours_error:
         results.append((f"""Notify_message hourly check
-Process {item.process.process_name}is running and face the error with the reason
+Process {item.process.process_name} is running and face the error with the reason
 {item.reason}, please check the robot"""))
     #Notify message to the list
 
